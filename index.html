@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>轮播图</title>
+    <link rel="stylesheet" href="./css/app.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="item left" data-color="radial-gradient(#999, #293242)">
+        <img src="./img/佐助.png" width="100%" alt="" />
+      </div>
+      <div class="item mid" data-color="radial-gradient(#999, #bc4641)">
+        <img src="./img/小樱.png" width="100%" alt="" />
+      </div>
+      <div class="item right" data-color="radial-gradient(#999, #cc6c0e)">
+        <img src="./img/鸣人.png" width="100%" alt="" />
+      </div>
+    </div>
+    <script>
+      //获取元素
+      const items = document.querySelectorAll('.item');
+      //绑定事件
+      for (let i = 0; i < items.length; i++) {
+        items[i].addEventListener('click', function () {
+          //点击元素居中
+          this.classList.remove('left', 'mid', 'right');
+          this.classList.add('mid');
+          //修改背景颜色
+          document.body.style.background = this.dataset.color;
+          //左侧元素
+          let left = this.previousElementSibling ?? items[items.length - 1]; //previousElementSibling获取同辈元素
+          left.classList.remove('left', 'mid', 'right');
+          left.classList.add('left');
+          //右侧元素
+          let right = this.nextElementSibling ?? items[0];
+          right.classList.remove('left', 'mid', 'right');
+          right.classList.add('right');
+        });
+      }
+    </script>
+  </body>
+</html>
